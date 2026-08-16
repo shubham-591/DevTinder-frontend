@@ -8,6 +8,7 @@ import Feed from "./components/Feed";
 import Profile from "./components/Profile";
 
 function App() {
+
   return (
     <>
       <Provider store={appStore}>
