@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { BASE_URL } from '../utils/constants'
 import { useDispatch, useSelector } from 'react-redux';
-import { addRequests } from '../utils/requestSlice';
+import { addRequests, removeRequest } from '../utils/requestSlice';
 
 const Requests = () => {
 
@@ -11,6 +11,24 @@ const Requests = () => {
     const [error, setError] = useState("");
     const dispatch = useDispatch();
 
+    
+
+    const reviewRequest = async (status, _id) => {
+        try {
+            
+            const res = await axios.post(
+                BASE_URL + "/request/review/"+status+"/"+_id,
+                {},
+                {
+                    withCredentials: true
+                }
+            )
+            dispatch(removeRequest(_id));
+
+        } catch (error) {
+            setError(error?.response?.data || "Something went wrong")
+        }
+    }
 
     const fetchRequests = async () => {
         try {
@@ -23,7 +41,7 @@ const Requests = () => {
             )
             console.log(res.data.data);
             
-            dispatch(addRequests(res?.data?.data));
+            dispatch(addRequests(res.data.data));
 
         } catch (error) {
             setError(error?.response?.data || "Something went wrong");
@@ -38,7 +56,7 @@ const Requests = () => {
 
     if(requests.length === 0) {
         return (
-            <h1>No Requests Found</h1>
+            <h1 className='flex justify-center font-semibold text-4xl my-10'>No Requests Found</h1>
         )
     }
 
@@ -59,17 +77,17 @@ const Requests = () => {
 
                         {/* User information */}
                         <div className='text-left mx-4 flex-1 min-w-0'>
-                            <h2 className='font-bold text-xl'>{request.fromUserId.name}</h2>
-                            {request.fromUserId.age && request.fromUserId.gender &&
-                                <p>{request.fromUserId.age + ", " + gender}</p>
+                            <h2 className='font-bold text-xl'>{name}</h2>
+                            {age && gender &&
+                                <p>{age + ", " + gender}</p>
                             }
-                            <p>{request.fromUserId.about}</p>
+                            <p>{about}</p>
                         </div>
 
                         {/* Buttons */}
                         <div className='flex gap-4 shrink-0 ml-auto'>
-                            <button className="btn btn-primary mx-2">Reject</button>
-                            <button className="btn btn-secondary mx-2">Accept</button>
+                            <button className="btn btn-primary mx-2" onClick={() => reviewRequest("rejected", request._id)}>Reject</button>
+                            <button className="btn btn-secondary mx-2" onClick={() => reviewRequest("accepted", request._id)}>Accept</button>
                         </div>
                     </div>
                 )

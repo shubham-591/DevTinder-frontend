@@ -37,7 +37,7 @@ const Connections = () => {
     if(!connections) return;
 
     if(connections.length === 0) {
-        return <h1>No connections found</h1>
+        return <h1 className='flex justify-center font-semibold text-4xl my-10'>No connections found</h1>
     }
 
     return (
@@ -46,19 +46,19 @@ const Connections = () => {
 
             {connections.map((connection) => {
                 // console.log(connection.toUserId.name);
-                const { _id, name, age, gender, about, photoUrl } = connection.toUserId;
+                const { _id, name, age, gender, about, photoUrl } = connection;
                 
                 return (
                     <div key={_id} className='flex m-4 p-4 rounded-sm bg-base-300 w-1/2'>
-                        <div>
-                            <img className='w-32 h-32 rounded-full' src={photoUrl} alt="" />
+                        <div className='w-36 h-36 shrink-0'>
+                            <img className='w-full h-full rounded-full object-cover' src={photoUrl} alt="" />
                         </div>
                         <div className='text-left mx-4'>
-                            <h2 className='font-bold text-xl'>{connection.toUserId.name}</h2>
-                            {connection.toUserId.age && connection.toUserId.gender &&
-                                <p>{connection.toUserId.age + ", " + gender}</p>
+                            <h2 className='font-bold text-xl'>{name}</h2>
+                            {age && gender &&
+                                <p>{age + ", " + gender}</p>
                             }
-                            <p>{connection.toUserId.about}</p>
+                            <p>{about}</p>
                         </div>
                     </div>
                 )
