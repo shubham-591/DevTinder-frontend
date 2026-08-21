@@ -46,10 +46,10 @@ const Connections = () => {
 
             {connections.map((connection) => {
                 // console.log(connection.toUserId.name);
-                const { name, age, gender, about, photoUrl } = connection.toUserId;
+                const { _id, name, age, gender, about, photoUrl } = connection.toUserId;
                 
                 return (
-                    <div className='flex m-4 p-4 rounded-sm bg-base-300 w-1/2'>
+                    <div key={_id} className='flex m-4 p-4 rounded-sm bg-base-300 w-1/2'>
                         <div>
                             <img className='w-32 h-32 rounded-full' src={photoUrl} alt="" />
                         </div>
