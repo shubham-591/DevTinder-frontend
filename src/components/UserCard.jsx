@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BASE_URL } from '../utils/constants';
 import { removeUserFromFeed } from '../utils/feedSlice';
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, showActions = false }) => {
     // console.log(user);
 
     const { _id, name, gender, skills, about, age, photoUrl } = user;
@@ -45,10 +45,10 @@ const UserCard = ({ user }) => {
                     <p>{age + " " + gender}</p>
                 }
                 <p>{about}</p>
-                <div className="card-actions justify-end">
+                {showActions && <div className="card-actions justify-end">
                     <button className="btn btn-secondary" onClick={() => handleSendRequest("ignored", _id)}>Ignore</button>
                     <button className="btn btn-primary" onClick={() => handleSendRequest("interested", _id)}>Interested</button>
-                </div>
+                </div>}
             </div>
         </div>
     )

@@ -8,7 +8,7 @@ import { addUser } from '../utils/userSlice';
 const EditProfile = ({ user }) => {
 
     const [name, setName] = useState(user.name);
-    const [age, setAge] = useState(user.age);
+    const [age, setAge] = useState(user.age || "");
     const [gender, setGender] = useState(user.gender);
     const [about, setAbout] = useState(user.about);
     const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
@@ -106,7 +106,7 @@ const EditProfile = ({ user }) => {
                     </div>
                 </div>
 
-                <UserCard user={{ name, age, gender, about, photoUrl }} />
+                <UserCard user={{ name, age, gender, about, photoUrl }} showActions={false} />
             </div>
             {showToast && <div className="toast toast-top toast-center">
                 <div className="alert alert-success">
