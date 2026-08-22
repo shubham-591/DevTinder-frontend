@@ -23,6 +23,8 @@ const Feed = () => {
         }
       );
       dispatch(addFeed(res.data));
+      // console.log(res.data.data[0]._id);
+      
 
     } catch (error) {
       console.error(error);
@@ -32,6 +34,14 @@ const Feed = () => {
   useEffect(() => {
     getFeed();
   }, []);
+
+  if(!feed) return;
+
+  if(feed.data.length <= 0) {
+    return (
+      <h1 className='flex justify-center font-semibold text-4xl my-10'>No New Users Found</h1>
+    )
+  }
 
   return (
     feed && (

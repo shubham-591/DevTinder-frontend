@@ -11,8 +11,6 @@ const Requests = () => {
     const [error, setError] = useState("");
     const dispatch = useDispatch();
 
-    
-
     const reviewRequest = async (status, _id) => {
         try {
             
