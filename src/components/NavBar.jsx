@@ -36,7 +36,19 @@ const NavBar = () => {
         </div>
         {user && (<div className="flex gap-2">
           <div className="dropdown dropdown-end mx-6 flex">
-            <p className='px-4 my-2'>Welcome, {user.name}</p>
+            {/* <p className='px-4 my-2'>Welcome, {user.name}</p> */}
+            <div className="flex items-center gap-2 px-4">
+              <p>Welcome, {user.name}</p>
+
+              {user.isPremium && (
+                <span
+                  className="text-yellow-400 text-lg"
+                  title="Premium User"
+                >
+                  👑
+                </span>
+              )}
+            </div>
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img
@@ -50,7 +62,7 @@ const NavBar = () => {
               <li>
                 <Link to="/profile" className="justify-between">
                   Profile
-                  <span className="badge">New</span>
+                  {/* <span className="badge">New</span> */}
                 </Link>
               </li>
               <li>
@@ -58,6 +70,9 @@ const NavBar = () => {
               </li>
               <li>
                 <Link to="/requests">Requests</Link>
+              </li>
+              <li>
+                <Link to="/premium">Premium</Link>
               </li>
               <li><a onClick={handleLogout}>Logout</a></li>
             </ul>
